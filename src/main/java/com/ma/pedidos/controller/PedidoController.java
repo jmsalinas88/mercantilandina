@@ -2,10 +2,12 @@ package com.ma.pedidos.controller;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -21,7 +23,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 import com.ma.pedidos.entity.Pedido;
+import com.ma.pedidos.entity.Producto;
+import com.ma.pedidos.error.ApiError;
 import com.ma.pedidos.service.PedidoService;
+import com.ma.pedidos.service.ProductService;
 
 @RestController
 @RequestMapping("/pedidos")
@@ -29,13 +34,29 @@ public class PedidoController {
 	
 	@Autowired 
 	private PedidoService pedidoService;
+	@Autowired 
+	private ProductService productService;
 	
 	@PostMapping
-	public ResponseEntity<Pedido> createPedido(@Validated @RequestBody Pedido pedido){
+	public ResponseEntity<?> createPedido(@Validated @RequestBody Pedido pedido){
 		if(pedido.getFecha() == null) {
 			pedido.setFecha(new Date());
 		}
-		return ResponseEntity.status(HttpStatus.CREATED).body(this.pedidoService.saveOrUpdate(pedido));
+		List<ApiError> productNotFundList = new ArrayList<ApiError>();
+		pedido.getDetalle().forEach(det -> {
+			int idproducto = det.getProducto().getId();
+			Optional<Producto> optProducto = this.productService.findById(idproducto);
+			if(optProducto.isPresent()) {
+				det.setProducto(optProducto.get());
+			}else {
+				productNotFundList.add(new ApiError("Producto no encontrado, id: " + idproducto));
+			}
+		});
+		if(productNotFundList.isEmpty()) {
+			return ResponseEntity.status(HttpStatus.CREATED).body(this.pedidoService.saveOrUpdate(pedido));
+		}else {
+			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(productNotFundList);
+		}
 	}
 	
 	@GetMapping
