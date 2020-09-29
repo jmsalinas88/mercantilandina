@@ -17,7 +17,10 @@ import com.ma.pedidos.repository.ProductRepository;
 public class MainApp {
 
 	public static void main(String[] args) {
-		ConfigurableApplicationContext context = 
+		
+		SpringApplication.run(MainApp.class, args);
+		
+		/*ConfigurableApplicationContext context = 
 				SpringApplication.run(MainApp.class, args);
 		
 		PedidoRepository pedidoRepository = context.getBean(PedidoRepository.class);
@@ -46,7 +49,7 @@ public class MainApp {
 		List<PedidoDet> detList = Arrays.asList(det1, det2);
 		pedido.setDetalle(detList);
 		
-		pedidoRepository.save(pedido);
+		pedidoRepository.save(pedido); */
 		
 	}
 
