@@ -4,8 +4,10 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Table;
 
 @Entity
+@Table(name="productos")
 public class Producto {
 
 	@Id
@@ -15,6 +17,8 @@ public class Producto {
 	private String descripcionCorta;
 	private String descripcionLarga;
 	private Double precioUnitario;
+	
+	public Producto() {}
 	
 	public Integer getId() {
 		return id;
