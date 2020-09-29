@@ -43,11 +43,11 @@ public class PedidoController {
 			pedido.setFecha(new Date());
 		}
 		List<ApiError> productNotFundList = new ArrayList<ApiError>();
-		pedido.getDetalle().forEach(det -> {
-			int idproducto = det.getProducto().getId();
+		pedido.getDetalle().forEach(pedidoDetalle -> {
+			int idproducto = pedidoDetalle.getProducto().getId();
 			Optional<Producto> optProducto = this.productService.findById(idproducto);
 			if(optProducto.isPresent()) {
-				det.setProducto(optProducto.get());
+				pedidoDetalle.setProducto(optProducto.get());
 			}else {
 				productNotFundList.add(new ApiError("Producto no encontrado, id: " + idproducto));
 			}

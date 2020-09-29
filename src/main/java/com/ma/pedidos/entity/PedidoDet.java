@@ -21,6 +21,13 @@ public class PedidoDet {
 	private Producto producto;
 	
 	public PedidoDet() {}
+	
+	public PedidoDet(Integer id, Integer cantidad, Producto producto) {
+		super();
+		this.id = id;
+		this.cantidad = cantidad;
+		this.producto = producto;
+	}
 
 	public Integer getId() {
 		return id;

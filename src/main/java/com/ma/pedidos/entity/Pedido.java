@@ -48,6 +48,26 @@ public class Pedido {
 	private List<PedidoDet> detalle;
 
 	public Pedido() {}
+	
+	public Pedido(Integer id,
+			String direccion,
+			String email,
+			String telefono,
+			String horario,
+			Date fecha, Boolean descuento, Estado estado, Double total,
+			List<PedidoDet> detalle) {
+		super();
+		this.id = id;
+		this.direccion = direccion;
+		this.email = email;
+		this.telefono = telefono;
+		this.horario = horario;
+		this.fecha = fecha;
+		this.descuento = descuento;
+		this.estado = estado;
+		this.total = total;
+		this.detalle = detalle;
+	}
 
 	public Integer getId() {
 		return id;

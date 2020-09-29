@@ -20,6 +20,15 @@ public class Producto {
 	
 	public Producto() {}
 	
+	public Producto(Integer id,String nombre, String descripcionCorta, String descripcionLarga, Double precioUnitario) {
+		super();
+		this.id = id;
+		this.nombre = nombre;
+		this.descripcionCorta = descripcionCorta;
+		this.descripcionLarga = descripcionLarga;
+		this.precioUnitario = precioUnitario;
+	}
+
 	public Integer getId() {
 		return id;
 	}
