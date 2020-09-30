@@ -1,8 +1,5 @@
 package com.ma.pedidos;
 
-import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.ArgumentMatchers.*;
-
 import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
@@ -18,6 +15,9 @@ import com.ma.pedidos.entity.PedidoDet;
 import com.ma.pedidos.entity.Producto;
 import com.ma.pedidos.repository.PedidoRepository;
 import com.ma.pedidos.service.PedidoService;
+
+import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.ArgumentMatchers.*;
 
 @ExtendWith(MockitoExtension.class)
 public class PedidoServiceTest {
