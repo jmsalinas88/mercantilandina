@@ -30,9 +30,11 @@ public class ProductoController {
 	
 	@PutMapping("/{id}")
 	public ResponseEntity<Producto> updateProduct(@RequestBody Producto producto, @PathVariable("id") Integer id){
-		producto.setId(id);
 		return productService.findById(id)
-			   .map(p -> ResponseEntity.ok().body(this.productService.saveOrUpdate(producto)))
+			   .map(p -> {
+				   	producto.setId(p.getId());
+				   	return ResponseEntity.ok().body(this.productService.saveOrUpdate(producto));
+				})
 			   .orElse(ResponseEntity.notFound().build());			   
 	}
 	
@@ -50,8 +52,12 @@ public class ProductoController {
 	public ResponseEntity<?> deleteProduct(@PathVariable("id") Integer id){
 		return productService.findById(id)
 				   .map(p -> {
-					   this.productService.delete(id);
-					   return ResponseEntity.noContent().build();
+					   if(this.productService.hasPedidosAssociated(p.getId())) {
+						   return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new ApiError("El producto no puede ser eliminado, tiene pedidos asociados"));
+					   }else {
+						   this.productService.delete(id);
+						   return ResponseEntity.noContent().build();
+					   }
 				   })
 				   .orElse(ResponseEntity.notFound().build());
 	}

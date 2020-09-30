@@ -1,4 +1,4 @@
-package com.ma.pedidos;
+package com.ma.pedidos.controller;
 
 import java.util.Arrays;
 import java.util.Date;
@@ -42,13 +42,11 @@ public class PedidoControllerTest {
 	
     @Test
 	public void when_create_pedido_then_return_201_with_pedido_created_in_body() {
-	
-	
+    	
 		PedidoDet det1 = new PedidoDet(1, 1, new Producto(1,"Naponiltana", "Pizza Napolitana Chica", "Fabulosa Pizza Napolitana Chica", 700D));
 		PedidoDet det2 = new PedidoDet(2, 1, new Producto(2,"Jamon y Morrones", "Pizza Jamon y Morrones Chica", "Fabulosa Pizza Jamon y Morrones Chica", 700D));
 		PedidoDet det3 = new PedidoDet(3, 1, new Producto(3,"Naponiltana", "Pizza Napolitana Chica", "Fabulosa Pizza Napolitana Chica", 700D));
 		Pedido pedido = new Pedido(1, "Av. Rivadavia 700", "emerica@gmail.com", "1598746687", "21:00", new Date(), false, Estado.PENDIENTE, 1000D, Arrays.asList(det1, det2, det3));
-		
 		Mockito.when(this.pedidoService.saveOrUpdate(any(Pedido.class))).thenReturn(pedido);
 		Mockito.when(this.productService.findById(any(Integer.class))).thenReturn(Optional.of(new Producto(1,"Naponiltana", "Pizza Napolitana Chica", "Fabulosa Pizza Napolitana Chica", 700D)));
 		
@@ -70,12 +68,11 @@ public class PedidoControllerTest {
     
     @Test
    	public void when_create_with_not_existing_product_then_return_400() {
-   	
+    	
    		PedidoDet det1 = new PedidoDet(1, 1, new Producto(1,"Naponiltana", "Pizza Napolitana Chica", "Fabulosa Pizza Napolitana Chica", 700D));
    		PedidoDet det2 = new PedidoDet(2, 1, new Producto(2,"Jamon y Morrones", "Pizza Jamon y Morrones Chica", "Fabulosa Pizza Jamon y Morrones Chica", 700D));
    		PedidoDet det3 = new PedidoDet(3, 1, new Producto(3,"Naponiltana", "Pizza Napolitana Chica", "Fabulosa Pizza Napolitana Chica", 700D));
    		Pedido pedido = new Pedido(1, "Av. Rivadavia 700", "emerica@gmail.com", "1598746687", "21:00", new Date(), false, Estado.PENDIENTE, 1000D, Arrays.asList(det1, det2, det3));
-   		
    		Mockito.when(this.pedidoService.saveOrUpdate(any(Pedido.class))).thenReturn(pedido);   		
    		Mockito.when(this.productService.findById(any(Integer.class))).thenReturn(Optional.empty());
    		 
@@ -99,7 +96,6 @@ public class PedidoControllerTest {
 		PedidoDet det3 = new PedidoDet(3, 1, new Producto(3,"Naponiltana", "Pizza Napolitana Chica", "Fabulosa Pizza Napolitana Chica", 700D));
 		Pedido pedido1 = new Pedido(1, "Av. Rivadavia 700", "emerica@gmail.com", "1598746687", "21:00", new Date(), false, Estado.PENDIENTE, 1000D, Arrays.asList(det1, det2, det3));
 		Pedido pedido2 = new Pedido(2, "Av. Rivadavia 700", "emerica@gmail.com", "1598746687", "21:00", new Date(), false, Estado.PENDIENTE, 1000D, Arrays.asList(det1, det2, det3));
-		
 		Mockito.when(this.pedidoService.findByFecha(any(Date.class))).thenReturn(Arrays.asList(pedido1, pedido2));
 		
 		when()

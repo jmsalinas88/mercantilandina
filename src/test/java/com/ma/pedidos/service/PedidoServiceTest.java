@@ -1,4 +1,4 @@
-package com.ma.pedidos;
+package com.ma.pedidos.service;
 
 import java.util.Arrays;
 import java.util.Date;
@@ -29,6 +29,7 @@ public class PedidoServiceTest {
 	
 	@Test
 	public void when_create_then_return_pedido_created() {
+		
 		PedidoDet det1 = new PedidoDet(1, 1, new Producto(1,"Naponiltana", "Pizza Napolitana Chica", "Fabulosa Pizza Napolitana Chica", 700D));
 		PedidoDet det2 = new PedidoDet(1, 1, new Producto(1,"Jamon y Morrones", "Pizza Jamon y Morrones Chica", "Fabulosa Pizza Jamon y Morrones Chica", 700D));
 		PedidoDet det3 = new PedidoDet(1, 1, new Producto(1,"Naponiltana", "Pizza Napolitana Chica", "Fabulosa Pizza Napolitana Chica", 700D));
@@ -39,6 +40,7 @@ public class PedidoServiceTest {
 	
 	@Test
 	public void when_findByFecha_then_return_listOfPedidos() {
+		
 		PedidoDet det1 = new PedidoDet(1, 1, new Producto(1,"Naponiltana", "Pizza Napolitana Chica", "Fabulosa Pizza Napolitana Chica", 700D));
 		PedidoDet det2 = new PedidoDet(1, 1, new Producto(1,"Jamon y Morrones", "Pizza Jamon y Morrones Chica", "Fabulosa Pizza Jamon y Morrones Chica", 700D));
 		PedidoDet det3 = new PedidoDet(1, 1, new Producto(1,"Naponiltana", "Pizza Napolitana Chica", "Fabulosa Pizza Napolitana Chica", 700D));
